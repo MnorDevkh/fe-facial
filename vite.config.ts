@@ -4,7 +4,8 @@ import react from "@vitejs/plugin-react";
 
 const lanMode = process.env.LAN === "1";
 
-const API_TARGET = "http://127.0.0.1:8000";
+const API_TARGET =
+  process.env.API_TARGET ?? "https://facial-detection-api.tepthida.site";
 
 /** Proxy API calls but serve index.html for browser refreshes on SPA routes. */
 function spaAwareProxy(overrides: Partial<ProxyOptions> = {}): ProxyOptions {
@@ -43,7 +44,7 @@ export default defineConfig({
   server: {
     port: 5173,
     host: lanMode || undefined,
-    https: lanMode || undefined,
+    https: lanMode ? {} : undefined,
     proxy: {
       "/health": spaAwareProxy(),
       "/people": spaAwareProxy(),
