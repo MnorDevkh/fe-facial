@@ -7,7 +7,7 @@ interface FaceOverlayProps {
   faces: FaceResult[];
 }
 
-function colorForFace(face: FaceResult): string {
+export function colorForFace(face: FaceResult): string {
   const key = face.student_id ?? face.name;
   if (key.toLowerCase() === "unknown") return "#ef4444";
   let hash = 0;
